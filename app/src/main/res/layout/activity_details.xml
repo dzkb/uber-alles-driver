@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:backgroundTint="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/driver_info"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/arrival_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/arrival_time"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            app:cardBackgroundColor="@android:color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ic_account"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="23dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="23dp"
+                    android:src="@drawable/ic_account_circle_black_24dp" />
+
+                <TextView
+                    android:id="@+id/name_surname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/ic_account"
+                    android:text="@string/name_surname"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/passenger_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name_surname"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/ic_account"
+                    android:text="@string/example_name"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            app:cardBackgroundColor="@android:color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ic_car"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="23dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="23dp"
+                    android:src="@drawable/ic_local_taxi_black_1_24dp" />
+
+                <TextView
+                    android:id="@+id/car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/ic_car"
+                    android:text="@string/car"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/car"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/ic_car"
+                    android:text="@string/example_car_name"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            app:cardBackgroundColor="@android:color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ic_plates"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="23dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="23dp"
+                    android:src="@drawable/ic_web_black_24dp" />
+
+                <TextView
+                    android:id="@+id/plates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/ic_plates"
+                    android:text="@string/plates_number"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/plates"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/ic_plates"
+                    android:text="@string/example_plates_number"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            app:cardBackgroundColor="@android:color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ic_phone"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="23dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="23dp"
+                    android:src="@drawable/ic_phone_black_24dp" />
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/ic_phone"
+                    android:text="@string/phone_number"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/phone"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/ic_phone"
+                    android:text="@string/example_phone_number"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            app:cardBackgroundColor="@android:color/white">
+
+            <Button
+                android:id="@+id/cancel_ride_activity"
+                android:layout_width="260dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@color/colorAccent"
+                android:elevation="15dp"
+                android:text="@string/cancel_fares"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</LinearLayout>

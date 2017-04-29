@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "491461144768",
+    "firebase_url": "https://uberalles-9f3dd.firebaseio.com",
+    "project_id": "uberalles-9f3dd",
+    "storage_bucket": "uberalles-9f3dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491461144768:android:cf3658acd7a2c446",
+        "android_client_info": {
+          "package_name": "com.example.tomek.uberallesdriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491461144768-1eefj67e29o11dca4g1816i1ulv07o1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tomek.uberallesdriver",
+            "certificate_hash": "cb04df09bacb2c10066a5b781709860262e8ad02"
+          }
+        },
+        {
+          "client_id": "491461144768-1cgq3qnp4d3klb628q7vlrqfan80hb9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADnWfIu8oJM7xEemVPPxyTm2arjnCpBOo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491461144768-1cgq3qnp4d3klb628q7vlrqfan80hb9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">uberallesdriver</string>
+    <string name="taxi_drive">Taxi Drive</string>
+    <string name="email_hint"><font size="15"> Email</font></string>
+    <string name="password_hint"><font size="15"> Hasło</font></string>
+    <string name="confirm_password_hint"><font size="15"> Powtórz hasło</font></string>
+    <string name="first_name_hint"><font size="15"> Imię</font></string>
+    <string name="last_name_hint"><font size="15"> Nazwisko</font></string>
+    <string name="phone_number_hint"><font size="15"> Numer telefonu</font></string>
+    <string name="password_forgot">Zapomniałeś hasła?</string>
+    <string name="login">Zaloguj się</string>
+    <string name="sing_up">Stwórz konto</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="history">Historia</string>
+    <string name="order">Zamów</string>
+    <string name="settings">Ustawienia</string>
+    <string name="my_location">Podaj miejsce początkowe</string>
+    <string name="destination_point">Podaj punkt docelowy</string>
+    <string name="set_time">Podaj czas</string>
+    <string name="create_account">Stwórz konto</string>
+    <string name="wrong_password">Nieprawidłowe hasło</string>
+    <string name="confirm_info">Najbliższa taksówka znajdzie się we wskazanej lokalizacji o godzinie: </string>
+    <string name="time_example">12:56</string>
+    <string name="cancel">Anuluj</string>
+    <string name="confirm">Potwierdz</string>
+    <string name="driver_info">Dane kierowcy</string>
+    <string name="arrival_time">Przyjazd 12:56</string>
+    <string name="name_surname">Imię i nazwisko:</string>
+    <string name="example_name">Andrzej Walczak</string>
+    <string name="example_car_name">Opel Corsa B</string>
+    <string name="car">Pojazd</string>
+    <string name="plates_number">Numer rejestracyjny</string>
+    <string name="example_plates_number">PKE 0700C</string>
+    <string name="phone_number">Numer telefonu</string>
+    <string name="example_phone_number">070 088 007</string>
+    <string name="cancel_fares">Anuluj przejazd</string>
+    <string name="fares_history">Historia przejazdów</string>
+    <string name="sum">Suma:</string>
+    <string name="line">__________________________</string>
+</resources>

@@ -1,0 +1,128 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tomek.uberallesdriver.fragments.OrderFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/start_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_access_time_black_24dp" />
+
+            <EditText
+                android:id="@+id/start_point_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@+id/location_image"
+                android:layout_toRightOf="@+id/start_point"
+                android:background="@android:color/white"
+                android:hint="@string/my_location"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/location_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_my_location_black_24dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/destination_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_access_time_black_24dp" />
+
+            <EditText
+                android:id="@+id/descination_point_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@+id/destination_point"
+                android:background="@android:color/white"
+                android:hint="@string/destination_point"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/watch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_access_time_black_24dp" />
+
+            <EditText
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@+id/watch"
+                android:background="@android:color/white"
+                android:hint="@string/set_time"
+                android:editable="false"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"/>
+
+        </RelativeLayout>
+
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp" />
+    </LinearLayout>
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_add_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="85dp"
+            android:src="@drawable/ic_add_white_24dp" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_open_next_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="85dp"
+            android:src="@drawable/ic_arrow_forward_white_24dp" />
+    </android.support.design.widget.CoordinatorLayout>
+
+</FrameLayout>
