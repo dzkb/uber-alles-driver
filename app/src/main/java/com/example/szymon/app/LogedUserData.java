@@ -4,12 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.example.szymon.app.api.pojo.Fare;
+
+import java.util.HashMap;
+
 public class LogedUserData {
 
     public static String USER_PHONE;
     public static String USER_PASSWORD;
     public static String USER_SURNAME;
     public static String USER_NAME;
+
+    public static HashMap<String, Fare> FARES_LIST = null;
 
     public static void saveCredentials(String login, String password, String firstName, String lastName, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
