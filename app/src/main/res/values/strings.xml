@@ -10,15 +10,17 @@
     <string name="password_forgot">Zapomniałeś hasła?</string>
     <string name="login">Zaloguj się</string>
     <string name="sing_up">Stwórz konto</string>
-
-    <string name="my_location">Podaj miejsce początkowe</string>
-    <string name="destination_point">Podaj punkt docelowy</string>
-    <string name="set_time">Podaj czas</string>
     <string name="create_account">Stwórz konto</string>
     <string name="wrong_password">Nieprawidłowe hasło</string>
     <string name="confirm_info">Najbliższa taksówka znajdzie się we wskazanej lokalizacji o godzinie: </string>
     <string name="time_example">12:56</string>
     <string name="cancel">Anuluj</string>
+    <string name="history">Historia</string>
+    <string name="order">Zamów</string>
+    <string name="settings">Ustawienia</string>
+    <string name="my_location">Podaj miejsce początkowe</string>
+    <string name="destination_point">Podaj punkt docelowy</string>
+    <string name="set_time">Podaj czas</string>
     <string name="confirm">Potwierdz</string>
     <string name="driver_info">Dane kierowcy</string>
     <string name="arrival_time">Przyjazd 12:56</string>
