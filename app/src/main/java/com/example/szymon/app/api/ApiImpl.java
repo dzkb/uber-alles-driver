@@ -4,6 +4,8 @@ import android.util.Log;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Localisation;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.szymon.app.LogedUserData.ALL_FARES_LIST;
 import static com.example.szymon.app.LogedUserData.USER_PASSWORD;
 import static com.example.szymon.app.LogedUserData.USER_PHONE;
-
+import static com.example.szymon.app.LogedUserData.mainTheard;
+import static com.example.szymon.app.fragments.AvailableJourneysFragment.adapter;
+import static com.example.szymon.app.fragments.AvailableJourneysFragment.adapterNewFares;
 
 public class ApiImpl {
 
-    public static List<Fare> getFares(Fares parameter) {
-        final List<Fare> fares = new ArrayList<>();
+    public static ArrayList<Fare> getFares(Fares parameter) {
+        final ArrayList<Fare> fares = new ArrayList<>();
         final String phoneNumber = USER_PHONE;
         final String password = USER_PASSWORD;
         UserService fareService = ApiClient.createService(UserService.class, phoneNumber, password);
@@ -26,17 +31,23 @@ public class ApiImpl {
         switch (parameter) {
             case ALL:
                 call = fareService.allFares();
+                ALL_FARES_LIST = fares;
                 break;
             case ONLY_ACCEPTED:
                 call = fareService.acceptedFares();
+                break;
+            default:
+                Log.d("Error", "Incorrect task");
         }
 
         call.enqueue(new Callback<List<Fare>>() {
             @Override
             public void onResponse(Call<List<Fare>> call, Response<List<Fare>> response) {
                 if (response.isSuccessful()) {
-                    fares.addAll(response.body());
+                    fares.addAll(response.body().subList(0, 2));
                     Log.d("OK", "Liczba pobranych przejazdów " + fares.size());
+                    adapter.notifyDataSetChanged();
+                    adapterNewFares.notifyDataSetChanged();
                 } else {
                     Log.d("Error", "Coś poszło nie tak . . .");
                 }

@@ -1,20 +1,13 @@
 package com.example.szymon.app.fragments;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.szymon.app.R;
 import com.example.szymon.app.RecyclerAdapter;
@@ -22,20 +15,15 @@ import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Point;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import static com.example.szymon.app.LogedUserData.FARES_LIST;
+import static com.example.szymon.app.LogedUserData.ALL_FARES_LIST;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AvailableJourneysFragment extends Fragment {
 
     RecyclerView recyclerView, recyclerViewNewFares;
 
-    ArrayList<Fare> fares;
-    RecyclerAdapter adapter;
-    RecyclerAdapter adapterNewFares;
+    public static RecyclerAdapter adapter;
+    public static RecyclerAdapter adapterNewFares;
     View rootView;
 
     public AvailableJourneysFragment() {
@@ -57,29 +45,24 @@ public class AvailableJourneysFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         recyclerViewNewFares.setLayoutManager(layoutManager);
 
-        adapter = new RecyclerAdapter(createExampleList(), getActivity(), getContext(),false);
-        adapterNewFares = new RecyclerAdapter(createExampleList(), getActivity(), getContext(),true);
+        adapter = new RecyclerAdapter(ALL_FARES_LIST, getActivity(), getContext(), false);
+        adapterNewFares = new RecyclerAdapter(ALL_FARES_LIST, getActivity(), getContext(), true);
 
-
-        recyclerView.setAdapter(adapter);
         recyclerViewNewFares.setAdapter(adapterNewFares);
+        recyclerView.setAdapter(adapter);
 
         return rootView;
     }
+
     private ArrayList<Fare> createExampleList() {
-        fares = new ArrayList<>();
 
-        if (FARES_LIST == null) {
-            Point first = new Point(17.1, 20.2);
-            Point second = new Point(27.1, 10.2);
-            FARES_LIST = new HashMap<>();
-            Fare fare = new Fare(first, second, "Szymon Zwoliński", 500700600, "12/03/1016");
-            FARES_LIST.put("-KiQxGUbh-TvcznBn6nX", fare);
-        }
-        return new ArrayList(FARES_LIST.values());
-
+        ArrayList<Fare> fares = new ArrayList<>();
+        Point first = new Point(17.152d, 20.241d);
+        Point second = new Point(27.145d, 10.278d);
+        Fare fare = new Fare("-KiQxGUbh-TvcznBn6nX", first, second, "Szymon Zwoliński", "500700600", "500145623", "2017-01-02T03:01:45+01:00", "2017-01-02T03:09:45+01:00", "placed");
+        Fare fare2 = new Fare("-KiQxGUbh-TvcznBn6nX", first, second, "Szymon Zwoliński", "500700600", "500145623", "2017-01-02T03:01:45+01:00", "2017-01-02T03:09:45+01:00", "placed");
+        fares.add(fare);
+        fares.add(fare2);
+        return fares;
     }
-
-
-
 }

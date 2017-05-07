@@ -2,9 +2,7 @@ package com.example.szymon.app;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -54,11 +52,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         final Fare fare = faresList.get(position);
         Point startPoint = fare.getStartingPoint();
         Point destinationPoint = fare.getEndingPoint();
-        holder.startPoint.setText(String.valueOf((startPoint.getLatitude() + ", " + startPoint.getLongitude())));
-        holder.destinationPoint.setText(String.valueOf((destinationPoint.getLatitude() + ", " + destinationPoint.getLongitude())));
+        holder.startPoint.setText(String.valueOf((round(startPoint.getLatitude(), 2) + ", " + round(startPoint.getLongitude(), 2))));
+        holder.destinationPoint.setText(String.valueOf((round(destinationPoint.getLatitude(), 2) + ", " + round(destinationPoint.getLongitude(), 2))));
         holder.date.setText(fare.getStartingDate());
         holder.newFare.setVisibility(View.INVISIBLE);
-        if (isNewFaresList ){
+        if (isNewFaresList) {
             holder.cardView.setBackgroundColor(Color.LTGRAY);
             holder.newFare.setVisibility(View.VISIBLE);
         }
@@ -66,8 +64,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(activity, DetailsActivity.class);
-//                activity.startActivity(intent);
                 DetailsFragment detailsFragment = new DetailsFragment();
                 openFragment(detailsFragment);
             }
@@ -113,5 +109,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
 
+    }
+
+    public static double round(Double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }

@@ -29,7 +29,11 @@ import static com.example.szymon.app.LogedUserData.USER_NAME;
 import static com.example.szymon.app.LogedUserData.USER_PASSWORD;
 import static com.example.szymon.app.LogedUserData.USER_PHONE;
 import static com.example.szymon.app.LogedUserData.USER_SURNAME;
+import static com.example.szymon.app.LogedUserData.mainTheard;
 import static com.example.szymon.app.LogedUserData.saveCredentials;
+import static com.example.szymon.app.api.ApiImpl.Fares.ALL;
+import static com.example.szymon.app.api.ApiImpl.Fares.ONLY_ACCEPTED;
+import static com.example.szymon.app.api.ApiImpl.getFares;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -62,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.login_button)
     public void onLoginButtonClick(View v) {
+        checkCredentials(phoneNumberEditText.getText().toString(), passwordEditText.getText().toString());
         Intent intent = new Intent(LoginActivity.this, DriverActivity.class);
         startActivity(intent);
     }
@@ -81,6 +86,14 @@ public class LoginActivity extends AppCompatActivity {
                     USER_SURNAME = response.body().lastName;
                     USER_PHONE = response.body().phoneNumber;
                     USER_PASSWORD = password;
+                    mainTheard = Thread.currentThread();
+                    getFares(ALL);
+//                    new Thread() {
+//                        @Override
+//                        public void run() {
+//                            getFares(ALL);
+//                        }
+//                    }.start();
                     saveCredentials(USER_PHONE, USER_PASSWORD, USER_NAME, USER_SURNAME, context);
                     Intent intent = new Intent(LoginActivity.this, DriverActivity.class);
                     startActivity(intent);

@@ -10,5 +10,6 @@ public class User {
     public String firstName;
     @SerializedName("lastName")
     public String lastName;
-
+    @SerializedName("role")
+    public String role;
 }

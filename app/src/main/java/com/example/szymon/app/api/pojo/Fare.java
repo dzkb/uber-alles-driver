@@ -7,8 +7,6 @@ public class Fare {
 
     @SerializedName("id")
     private String id;
-    @SerializedName("reserved")
-    private Boolean reserved;
     @SerializedName("startingPoint")
     private Point startingPoint;
     @SerializedName("endingPoint")
@@ -16,9 +14,9 @@ public class Fare {
     @SerializedName("clientName")
     private String clientName;
     @SerializedName("clientPhone")
-    private Integer clientPhone;
+    private String clientPhone;
     @SerializedName("driverPhone")
-    private Integer driverPhone;
+    private String driverPhone;
     @SerializedName("startingDate")
     private String startingDate;
     @SerializedName("placedDate")
@@ -26,28 +24,24 @@ public class Fare {
     @SerializedName("status")
     private String status;
 
-
-    public Fare(Point startingPoint, Point endingPoint, String clientName, Integer clientPhone, String startingDate) {
+    public Fare(String id, Point startingPoint, Point endingPoint, String clientName, String clientPhone, String driverPhone, String startingDate, String placedDate, String status) {
+        this.id = id;
         this.startingPoint = startingPoint;
         this.endingPoint = endingPoint;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
+        this.driverPhone = driverPhone;
         this.startingDate = startingDate;
+        this.placedDate = placedDate;
+        this.status = status;
     }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Boolean getReserved() {
-        return reserved;
-    }
-
-    public void setReserved(Boolean reserved) {
-        this.reserved = reserved;
     }
 
     public Point getStartingPoint() {
@@ -74,19 +68,19 @@ public class Fare {
         this.clientName = clientName;
     }
 
-    public Integer getClientPhone() {
+    public String getClientPhone() {
         return clientPhone;
     }
 
-    public void setClientPhone(Integer clientPhone) {
+    public void setClientPhone(String clientPhone) {
         this.clientPhone = clientPhone;
     }
 
-    public Integer getDriverPhone() {
+    public String getDriverPhone() {
         return driverPhone;
     }
 
-    public void setDriverPhone(Integer driverPhone) {
+    public void setDriverPhone(String driverPhone) {
         this.driverPhone = driverPhone;
     }
 

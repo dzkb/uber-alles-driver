@@ -63,8 +63,6 @@ public class DriverActivity extends AppCompatActivity {
         );
     }
 
-//
-
     private void openFragment(final Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
