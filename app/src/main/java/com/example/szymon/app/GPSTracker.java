@@ -97,7 +97,7 @@ public final class GPSTracker implements LocationListener {
             e.printStackTrace();
         }
 
-        return new Point(location.getLatitude(), location.getLongitude());
+        return location != null ? new Point(location.getLatitude(), location.getLongitude()) : null;
     }
 
     public void stopUsingGPS() {
@@ -155,7 +155,8 @@ public final class GPSTracker implements LocationListener {
     public void onLocationChanged(Location location) {
         Log.d("INFO", "Wysyłam lokalizacje");
         Point newLocalisation = getLocation();
-        sendLocatisation(newLocalisation);
+        if (newLocalisation != null)
+            sendLocatisation(newLocalisation);
     }
 
     @Override
