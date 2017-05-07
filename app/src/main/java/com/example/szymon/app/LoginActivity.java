@@ -88,12 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                     USER_PASSWORD = password;
                     mainTheard = Thread.currentThread();
                     getFares(ALL);
-//                    new Thread() {
-//                        @Override
-//                        public void run() {
-//                            getFares(ALL);
-//                        }
-//                    }.start();
                     saveCredentials(USER_PHONE, USER_PASSWORD, USER_NAME, USER_SURNAME, context);
                     Intent intent = new Intent(LoginActivity.this, DriverActivity.class);
                     startActivity(intent);

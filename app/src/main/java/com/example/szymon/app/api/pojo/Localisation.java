@@ -10,6 +10,11 @@ public class Localisation {
     @SerializedName("longitude")
     private Point longitude;
 
+    public Localisation(Point latitude, Point longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Override
     public String toString() {
         return "Latitude " + latitude + "\tLongitude " + longitude;

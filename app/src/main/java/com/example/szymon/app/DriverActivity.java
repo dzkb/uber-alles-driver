@@ -1,5 +1,6 @@
 package com.example.szymon.app;
 
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.szymon.app.fragments.AvailableJourneysFragment;
@@ -29,10 +31,20 @@ public class DriverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_driver);
         ButterKnife.bind(this);
         initNavigationView();
+        GPSTracker mGPS = new GPSTracker(this);
+
+        if (mGPS.canGetLocation()) {
+            mGPS.getLocation();
+            Log.d("Info", "Lat" + mGPS.getLatitude() + "Lon" + mGPS.getLongitude());
+        } else {
+            Log.d("Error", "Unabletofind");
+            System.out.println("Unable");
+        }
 
         availableJourneysFragment = new AvailableJourneysFragment();
         openFragment(availableJourneysFragment);
     }
+
     public void initNavigationView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {

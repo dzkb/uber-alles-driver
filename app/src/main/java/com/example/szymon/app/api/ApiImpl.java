@@ -3,6 +3,7 @@ package com.example.szymon.app.api;
 import android.util.Log;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Localisation;
+import com.example.szymon.app.api.pojo.Point;
 
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -96,25 +97,25 @@ public class ApiImpl {
         });
     }
 
-    public static void sendLocatisation(final Localisation localisation) {
+    public static void sendLocatisation(final Point localisation) {
         final String phoneNumber = USER_PHONE;
         final String password = USER_PASSWORD;
         UserService fareService = ApiClient.createService(UserService.class, phoneNumber, password);
-        Call<Localisation> call = fareService.putLocalisation(localisation);
-        call.enqueue(new Callback<Localisation>() {
+        Call<Point> call = fareService.putLocalisation(localisation);
+        call.enqueue(new Callback<Point>() {
             @Override
-            public void onResponse(Call<Localisation> call, Response<Localisation> response) {
+            public void onResponse(Call<Point> call, Response<Point> response) {
                 if (response.isSuccessful()) {
+                    System.out.println("Lokalizacja wysłana");
                     Log.d("OK", "Wysłana lokalizacja: " + response.body());
                 } else {
                     Log.d("Error", "Coś poszło nie tak . . .");
                 }
             }
-
             @Override
-            public void onFailure(Call<Localisation> call, Throwable t) {
+            public void onFailure(Call<Point> call, Throwable t) {
+                System.out.println("Lokalizacja nie została wysłana");
                 Log.d("Error", "Komunikacja zawiodła");
-                Log.d("Error", t.getMessage());
             }
         });
     }

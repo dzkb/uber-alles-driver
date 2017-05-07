@@ -20,11 +20,7 @@ public class LogedUserData {
     public static Thread mainTheard = new Thread();
 
     public static void saveCredentials(String login, String password, String firstName, String lastName, Context context) {
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("Authentication_Id", login);
