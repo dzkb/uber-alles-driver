@@ -35,7 +35,7 @@
     <string name="cancel_fares">Anuluj przejazd</string>
     <string name="fares_history">Historia przejazdów</string>
     <string name="sum">Suma:</string>
-    <string name="line">__________________________</string>
+    <string name="line">_______________</string>
     <string name="active_fares">Aktywne przejazdy</string>
     <string name="start_point">Start podróży:</string>
     <string name="example_start_point">ul. Nowowiejska 35</string>

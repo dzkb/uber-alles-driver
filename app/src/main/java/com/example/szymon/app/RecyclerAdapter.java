@@ -3,6 +3,8 @@ package com.example.szymon.app;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,7 +20,10 @@ import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Point;
 import com.example.szymon.app.fragments.DetailsFragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -52,8 +57,32 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         final Fare fare = faresList.get(position);
         Point startPoint = fare.getStartingPoint();
         Point destinationPoint = fare.getEndingPoint();
-        holder.startPoint.setText(String.valueOf((round(startPoint.getLatitude(), 2) + ", " + round(startPoint.getLongitude(), 2))));
-        holder.destinationPoint.setText(String.valueOf((round(destinationPoint.getLatitude(), 2) + ", " + round(destinationPoint.getLongitude(), 2))));
+        Geocoder geocoder;
+        List<Address> addresses = null;
+        geocoder = new Geocoder(activity.getApplicationContext(), Locale.getDefault());
+        double startPointLatitude = startPoint.getLatitude();
+        double startPointLongitude = startPoint.getLongitude();
+        try {
+            addresses = geocoder.getFromLocation(startPointLatitude, startPointLongitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+
+        holder.startPoint.setText(address);
+        List<Address> addressesDestination = null;
+        double destinationPointLatitude = destinationPoint.getLatitude();
+        double destinationPointLongitude = destinationPoint.getLongitude();
+        try {
+            addressesDestination = geocoder.getFromLocation(destinationPointLatitude, destinationPointLongitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String addressDestination = addressesDestination.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+
+        holder.destinationPoint.setText(addressDestination);
+//        holder.startPoint.setText(String.valueOf((round(startPoint.getLatitude(), 2) + ", " + round(startPoint.getLongitude(), 2))));
+//        holder.destinationPoint.setText(String.valueOf((round(destinationPoint.getLatitude(), 2) + ", " + round(destinationPoint.getLongitude(), 2))));
         holder.date.setText(fare.getStartingDate());
         holder.newFare.setVisibility(View.INVISIBLE);
         if (isNewFaresList) {
