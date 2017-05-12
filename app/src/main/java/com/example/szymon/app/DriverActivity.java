@@ -1,5 +1,6 @@
 package com.example.szymon.app;
 
+import android.content.Context;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -24,6 +25,7 @@ public class DriverActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     AvailableJourneysFragment availableJourneysFragment;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class DriverActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initNavigationView();
         GPSTracker mGPS = new GPSTracker(this);
+        context = getApplicationContext();
 
         if (mGPS.canGetLocation()) {
             mGPS.getLocation();
@@ -81,5 +84,9 @@ public class DriverActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
 
+    }
+
+    public static Context giveMeContext() {
+        return context;
     }
 }

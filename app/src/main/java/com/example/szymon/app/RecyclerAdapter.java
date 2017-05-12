@@ -65,6 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View v) {
 
                 DetailsFragment detailsFragment = new DetailsFragment();
+                //detailsFragment.
                 openFragment(detailsFragment);
             }
         });
