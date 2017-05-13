@@ -59,14 +59,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "491461144768-1dtho17ljdlo0ooco91v5shk90itsfd3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.szymon.app",
-            "certificate_hash": "cb04df09bacb2c10066a5b781709860262e8ad02"
-          }
-        },
-        {
           "client_id": "491461144768-1cgq3qnp4d3klb628q7vlrqfan80hb9t.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -81,13 +73,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "491461144768-1cgq3qnp4d3klb628q7vlrqfan80hb9t.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
