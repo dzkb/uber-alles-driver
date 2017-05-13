@@ -1,5 +1,6 @@
 package com.example.szymon.app;
 
+import android.content.Context;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,7 +23,7 @@ public class DriverActivity extends AppCompatActivity {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
-
+    private static Context context;
     AvailableJourneysFragment availableJourneysFragment;
 
     @Override
@@ -81,5 +82,9 @@ public class DriverActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
 
+    }
+
+    public static Context giveMeContext() {
+        return context;
     }
 }
