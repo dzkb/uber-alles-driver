@@ -6,6 +6,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Button;
 
 import com.example.szymon.app.R;
 import com.example.szymon.app.RecyclerAdapter;
+import com.example.szymon.app.api.pojo.CMFareRequest;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Point;
 
@@ -91,5 +93,9 @@ public class AvailableJourneysFragment extends Fragment {
         fares.add(fare);
         fares.add(fare2);
         return fares;
+    }
+
+    public void onFareRequested(CMFareRequest fareRequest) {
+        Log.d("AvailableJourneys", fareRequest.toString());
     }
 }

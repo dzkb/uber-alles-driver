@@ -1,20 +1,26 @@
 package com.example.szymon.app;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.location.LocationManager;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.szymon.app.api.pojo.CMFareRequest;
+import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.fragments.AvailableJourneysFragment;
 import com.example.szymon.app.fragments.HistoryFragment;
 import com.example.szymon.app.fragments.SettingsFragment;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +29,7 @@ public class DriverActivity extends AppCompatActivity {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
-    private static Context context;
+
     AvailableJourneysFragment availableJourneysFragment;
 
     @Override
@@ -44,6 +50,15 @@ public class DriverActivity extends AppCompatActivity {
 
         availableJourneysFragment = new AvailableJourneysFragment();
         openFragment(availableJourneysFragment);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("CMFareRequest"));
+    }
+
+    @Override
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        super.onDestroy();
     }
 
     public void initNavigationView() {
@@ -83,8 +98,15 @@ public class DriverActivity extends AppCompatActivity {
         transaction.commit();
 
     }
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String payload = intent.getStringExtra("payload");
+            Log.d("Receiver", "Got message: " + payload);
+            Gson gson = new Gson();
 
-    public static Context giveMeContext() {
-        return context;
-    }
+            CMFareRequest request = gson.fromJson(payload, CMFareRequest.class);
+            availableJourneysFragment.onFareRequested(request);
+        }
+    };
 }
