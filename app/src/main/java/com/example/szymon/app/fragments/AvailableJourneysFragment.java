@@ -2,12 +2,14 @@ package com.example.szymon.app.fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.szymon.app.R;
 import com.example.szymon.app.RecyclerAdapter;
@@ -24,7 +26,10 @@ public class AvailableJourneysFragment extends Fragment {
 
     public static RecyclerAdapter adapter;
     public static RecyclerAdapter adapterNewFares;
+    BottomSheetBehavior bottomSheetBehavior;
+
     View rootView;
+    private Button fareAcceptBtn;
 
     public AvailableJourneysFragment() {
         // Required empty public constructor
@@ -51,7 +56,29 @@ public class AvailableJourneysFragment extends Fragment {
         recyclerViewNewFares.setAdapter(adapterNewFares);
         recyclerView.setAdapter(adapter);
 
+        bottomSheetBehavior = BottomSheetBehavior.from(rootView.findViewById(R.id.bottomSheetLayout));
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        openBottomSheet(rootView, bottomSheetBehavior);
+
         return rootView;
+    }
+
+    private void openBottomSheet(View rootView, final BottomSheetBehavior bottomSheetBehavior) {
+        fareAcceptBtn = (Button) rootView.findViewById(R.id.fare_accept_btn);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        fareAcceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    fareAcceptBtn.setText("dupa");
+                }
+                else {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    fareAcceptBtn.setText("dupa");
+                }
+            }
+        });
     }
 
     private ArrayList<Fare> createExampleList() {
