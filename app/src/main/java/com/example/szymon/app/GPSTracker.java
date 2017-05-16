@@ -25,9 +25,11 @@ public final class GPSTracker implements LocationListener {
     private Location location;
     private double latitude;
     private double longitude;
+    private long lastUpdateTimestamp = 0;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
     private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
+    private static final int THROTTLED_UPDATE_TIME = 3; // 3 seconds
 
     protected LocationManager locationManager;
 
@@ -153,10 +155,15 @@ public final class GPSTracker implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("INFO", "Wysyłam lokalizacje");
-        Point newLocalisation = getLocation();
-        if (newLocalisation != null)
-            sendLocatisation(newLocalisation);
+        long currentTimestamp = System.currentTimeMillis()/1000;
+        if ((currentTimestamp - lastUpdateTimestamp) > THROTTLED_UPDATE_TIME) {
+            lastUpdateTimestamp = currentTimestamp;
+            Log.d("INFO", "Wysyłam lokalizacje");
+            Point newLocalisation = getLocation();
+            if (newLocalisation != null) {
+                sendLocatisation(newLocalisation);
+            }
+        }
     }
 
     @Override
