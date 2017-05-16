@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.szymon.app.R;
 import com.example.szymon.app.RecyclerAdapter;
+import com.example.szymon.app.api.ApiImpl;
 import com.example.szymon.app.api.pojo.CMFareRequest;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Point;
@@ -92,7 +93,7 @@ public class AvailableJourneysFragment extends Fragment {
         return address.length() >= 20 ? address.substring(0, 17) + "..." : address;
     }
 
-    private void openBottomSheet(View rootView, final BottomSheetBehavior bottomSheetBehavior, CMFareRequest fareRequest) {
+    private void openBottomSheet(View rootView, final BottomSheetBehavior bottomSheetBehavior, final CMFareRequest fareRequest) {
         fareAcceptBtn = (Button) rootView.findViewById(R.id.fare_accept_btn);
         TextView startPoint = (TextView) rootView.findViewById(R.id.bottom_sheet_start_point_name);
         TextView endPoint = (TextView) rootView.findViewById(R.id.bottom_sheet_destination_point_name);
@@ -105,8 +106,8 @@ public class AvailableJourneysFragment extends Fragment {
         fareAcceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    fareAcceptBtn.setText("dupa");
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                ApiImpl.changeFareStatus(ApiImpl.Fares.CONFIRM, fareRequest.getFareID());
             }
         });
     }

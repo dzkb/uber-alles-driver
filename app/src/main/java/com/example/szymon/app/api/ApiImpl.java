@@ -1,6 +1,9 @@
 package com.example.szymon.app.api;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.api.pojo.Point;
@@ -22,6 +25,8 @@ import static com.example.szymon.app.fragments.AvailableJourneysFragment.adapter
 import static com.example.szymon.app.fragments.AvailableJourneysFragment.adapterNewFares;
 
 public class ApiImpl {
+
+    public static Context context;
 
     public static ArrayList<Fare> getFares(Fares parameter) {
         final ArrayList<Fare> fares = new ArrayList<>();
@@ -80,12 +85,16 @@ public class ApiImpl {
             default:
                 Log.d("Error", "Coś sie spiepszyło");
         }
+        final boolean shouldToast = parameter == Fares.CONFIRM;
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     Log.d("OK", "Odpowiedź z serwera: " + response.body());
                 } else {
+                    if (shouldToast && context != null) {
+                        Toast.makeText(context, response.message(), Toast.LENGTH_LONG);
+                    }
                     Log.d("Error", "Coś poszło nie tak . . .");
                 }
             }

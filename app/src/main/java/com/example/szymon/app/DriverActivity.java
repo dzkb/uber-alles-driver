@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.szymon.app.api.ApiImpl;
 import com.example.szymon.app.api.pojo.CMFareRequest;
 import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.fragments.AvailableJourneysFragment;
@@ -39,6 +40,7 @@ public class DriverActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initNavigationView();
         GPSTracker mGPS = new GPSTracker(this);
+        ApiImpl.context = getApplicationContext();
 
         if (mGPS.canGetLocation()) {
             mGPS.getLocation();
