@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.api.pojo.Point;
+import com.example.szymon.app.api.pojo.RegistrationToken;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.json.JSONObject;
@@ -144,5 +145,23 @@ public class ApiImpl {
         CANCEL,
         CONFIRM,
         COMPLETE
+    }
+
+    public static void updateRegistrationToken(final RegistrationToken registrationToken) {
+        final String phoneNumber = USER_PHONE;
+        final String password = USER_PASSWORD;
+        UserService fareService = ApiClient.createService(UserService.class, phoneNumber, password);
+        Call<String> call = fareService.putRegistrationToken(registrationToken);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("TOKEN", "Zaktualizowano registration token");
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }

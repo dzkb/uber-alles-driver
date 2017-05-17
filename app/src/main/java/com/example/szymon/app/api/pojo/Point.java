@@ -26,4 +26,12 @@ public class Point {
     public Double getLongitude() {
         return longitude;
     }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

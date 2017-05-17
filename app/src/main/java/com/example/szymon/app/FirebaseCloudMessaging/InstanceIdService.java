@@ -2,6 +2,8 @@ package com.example.szymon.app.FirebaseCloudMessaging;
 
 import android.util.Log;
 
+import com.example.szymon.app.api.ApiImpl;
+import com.example.szymon.app.api.pojo.RegistrationToken;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -18,7 +20,7 @@ public class InstanceIdService extends FirebaseInstanceIdService {
         // Get updated InstanceID token.
         registrationToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + registrationToken);
-        //sendRegistrationToServer(registrationToken);
+        ApiImpl.updateRegistrationToken(new RegistrationToken(registrationToken));
     }
 
     private void sendRegistrationToServer(final String refreshedToken) {

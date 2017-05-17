@@ -157,8 +157,8 @@ public final class GPSTracker implements LocationListener {
     public void onLocationChanged(Location location) {
         long currentTimestamp = System.currentTimeMillis()/1000;
         if ((currentTimestamp - lastUpdateTimestamp) > THROTTLED_UPDATE_TIME) {
+            Log.d("INFO", "Wysyłam lokalizacje po " + (currentTimestamp - lastUpdateTimestamp) + "s");
             lastUpdateTimestamp = currentTimestamp;
-            Log.d("INFO", "Wysyłam lokalizacje");
             Point newLocalisation = getLocation();
             if (newLocalisation != null) {
                 sendLocatisation(newLocalisation);

@@ -3,6 +3,7 @@ package com.example.szymon.app.api;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.api.pojo.Point;
+import com.example.szymon.app.api.pojo.RegistrationToken;
 import com.example.szymon.app.api.pojo.User;
 
 import java.util.List;
@@ -32,4 +33,6 @@ public interface UserService {
     Call<String> completeFare(@Path("fareId") String fareId);
     @PUT("/localisation")
     Call<Point> putLocalisation(@Body Point currentLocalisation);
+    @PUT("/registrationTokens")
+    Call<String> putRegistrationToken(@Body RegistrationToken registrationToken);
 }

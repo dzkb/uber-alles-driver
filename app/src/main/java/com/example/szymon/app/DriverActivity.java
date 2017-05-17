@@ -15,12 +15,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.szymon.app.FirebaseCloudMessaging.InstanceIdService;
 import com.example.szymon.app.api.ApiImpl;
 import com.example.szymon.app.api.pojo.CMFareRequest;
 import com.example.szymon.app.api.pojo.Localisation;
+import com.example.szymon.app.api.pojo.RegistrationToken;
 import com.example.szymon.app.fragments.AvailableJourneysFragment;
 import com.example.szymon.app.fragments.HistoryFragment;
 import com.example.szymon.app.fragments.SettingsFragment;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import butterknife.BindView;
@@ -41,6 +44,9 @@ public class DriverActivity extends AppCompatActivity {
         initNavigationView();
         GPSTracker mGPS = new GPSTracker(this);
         ApiImpl.context = getApplicationContext();
+
+        String registrationToken = FirebaseInstanceId.getInstance().getToken();
+        ApiImpl.updateRegistrationToken(new RegistrationToken(registrationToken));
 
         if (mGPS.canGetLocation()) {
             mGPS.getLocation();
