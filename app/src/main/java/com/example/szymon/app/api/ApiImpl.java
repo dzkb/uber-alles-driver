@@ -9,7 +9,9 @@ import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.api.pojo.Point;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,8 @@ public class ApiImpl {
             @Override
             public void onResponse(Call<List<Fare>> call, Response<List<Fare>> response) {
                 if (response.isSuccessful()) {
-                    fares.addAll(response.body().subList(0, 2));
+                    fares.addAll(response.body());
+//                    fares.addAll(response.body().subList(0, 2));
                     Log.d("OK", "Liczba pobranych przejazdów " + fares.size());
                     adapter.notifyDataSetChanged();
                     adapterNewFares.notifyDataSetChanged();
@@ -92,10 +95,16 @@ public class ApiImpl {
                 if (response.isSuccessful()) {
                     Log.d("OK", "Odpowiedź z serwera: " + response.body());
                 } else {
-                    if (shouldToast && context != null) {
-                        Toast.makeText(context, response.message(), Toast.LENGTH_LONG);
+                    try {
+                        JSONObject errorData = new JSONObject(response.errorBody().string());
+                        String error = errorData.getString("error");
+                        if (shouldToast && context != null) {
+                            Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+                        }
+                        Log.d("Error", error);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    Log.d("Error", "Coś poszło nie tak . . .");
                 }
             }
 
