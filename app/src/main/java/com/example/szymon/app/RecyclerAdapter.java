@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Point;
 import com.example.szymon.app.fragments.DetailsFragment;
+import com.example.szymon.app.utils.CommonDate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.destinationPoint.setText(addressDestination);
 //        holder.startPoint.setText(String.valueOf((round(startPoint.getLatitude(), 2) + ", " + round(startPoint.getLongitude(), 2))));
 //        holder.destinationPoint.setText(String.valueOf((round(destinationPoint.getLatitude(), 2) + ", " + round(destinationPoint.getLongitude(), 2))));
-        holder.date.setText(fare.getStartingDate());
+        holder.date.setText(CommonDate.getFormattedTime(fare.getStartingDate()));
         holder.newFare.setVisibility(View.INVISIBLE);
         if (isNewFaresList) {
             holder.cardView.setBackgroundColor(Color.LTGRAY);
