@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.szymon.app.api.pojo.CMFareRequest;
 import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Point;
 import com.example.szymon.app.fragments.DetailsFragment;
@@ -30,16 +31,20 @@ import java.util.Objects;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    ArrayList<Fare> faresList;
+    //ArrayList<Fare> faresList;
     Activity activity;
     Context context;
     Boolean isNewFaresList;
+    static ArrayList<CMFareRequest> faresListToDo;
 
-    public RecyclerAdapter(ArrayList<Fare> faresList, Activity activity, Context context, Boolean isNewFaresList) {
-        this.faresList = faresList;
+    public RecyclerAdapter(Activity activity, Context context, Boolean isNewFaresList) {
+
         this.activity = activity;
         this.context = context;
         this.isNewFaresList = isNewFaresList;
+        if(faresListToDo == null){
+            faresListToDo = new ArrayList<>();
+        }
     }
 
 
@@ -55,9 +60,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
 
-        final Fare fare = faresList.get(position);
-        Point startPoint = fare.getStartingPoint();
-        Point destinationPoint = fare.getEndingPoint();
+        //final Fare fare = faresList.get(position);
+        CMFareRequest fareRequest = faresListToDo.get(position);
+        Point startPoint = fareRequest.getStartingPoint();
+        Point destinationPoint = fareRequest.getEndingPoint();
         Geocoder geocoder;
         List<Address> addresses = null;
         geocoder = new Geocoder(activity.getApplicationContext(), Locale.getDefault());
@@ -84,7 +90,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.destinationPoint.setText(addressDestination);
 //        holder.startPoint.setText(String.valueOf((round(startPoint.getLatitude(), 2) + ", " + round(startPoint.getLongitude(), 2))));
 //        holder.destinationPoint.setText(String.valueOf((round(destinationPoint.getLatitude(), 2) + ", " + round(destinationPoint.getLongitude(), 2))));
-        holder.date.setText(CommonDate.getFormattedTime(fare.getStartingDate()));
+        holder.date.setText(CommonDate.getFormattedTime(fareRequest.getStartingDate()));
         holder.newFare.setVisibility(View.INVISIBLE);
         if (isNewFaresList) {
             holder.cardView.setBackgroundColor(Color.LTGRAY);
@@ -102,7 +108,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return faresList.size();
+        return faresListToDo.size();
+    }
+
+    public void addFare(CMFareRequest fareRequest){
+        if(faresListToDo.size()==0){
+            faresListToDo = new ArrayList<CMFareRequest>();
+        }
+        faresListToDo.add(fareRequest);
+        notifyDataSetChanged();
     }
 
 

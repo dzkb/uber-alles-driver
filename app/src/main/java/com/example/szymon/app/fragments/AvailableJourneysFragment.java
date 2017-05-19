@@ -33,11 +33,12 @@ import static com.example.szymon.app.LogedUserData.ALL_FARES_LIST;
 
 public class AvailableJourneysFragment extends Fragment {
 
-    RecyclerView recyclerView, recyclerViewNewFares;
+    RecyclerView recyclerView;
 
     public static RecyclerAdapter adapter;
-    public static RecyclerAdapter adapterNewFares;
+
     BottomSheetBehavior bottomSheetBehavior;
+    //ArrayList<CMFareRequest> faresRequestList;
 
     View rootView;
     private Button fareAcceptBtn;
@@ -53,18 +54,16 @@ public class AvailableJourneysFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_available_journeys, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        recyclerViewNewFares = (RecyclerView) rootView.findViewById(R.id.recycler_view_new_fares);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(rootView.getContext());
-        layoutManager.setStackFromEnd(true);
-        recyclerViewNewFares.setLayoutManager(layoutManager);
 
-        adapter = new RecyclerAdapter(ALL_FARES_LIST, getActivity(), getContext(), false);
-        adapterNewFares = new RecyclerAdapter(ALL_FARES_LIST, getActivity(), getContext(), true);
 
-        recyclerViewNewFares.setAdapter(adapterNewFares);
+
+        adapter = new RecyclerAdapter(getActivity(), getContext(), false);
+
+
+
         recyclerView.setAdapter(adapter);
 
         bottomSheetBehavior = BottomSheetBehavior.from(rootView.findViewById(R.id.bottomSheetLayout));
@@ -106,8 +105,13 @@ public class AvailableJourneysFragment extends Fragment {
         fareAcceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                if(faresRequestList==null){
+//                    faresRequestList = new ArrayList<CMFareRequest>();
+//                }
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                 ApiImpl.changeFareStatus(ApiImpl.Fares.CONFIRM, fareRequest.getFareID());
+
+                adapter.addFare(fareRequest);
             }
         });
     }
