@@ -25,7 +25,7 @@ import static com.example.szymon.app.LogedUserData.USER_PASSWORD;
 import static com.example.szymon.app.LogedUserData.USER_PHONE;
 import static com.example.szymon.app.LogedUserData.mainTheard;
 import static com.example.szymon.app.fragments.AvailableJourneysFragment.adapter;
-import static com.example.szymon.app.fragments.AvailableJourneysFragment.adapterNewFares;
+
 
 public class ApiImpl {
 
@@ -57,7 +57,7 @@ public class ApiImpl {
 //                    fares.addAll(response.body().subList(0, 2));
                     Log.d("OK", "Liczba pobranych przejazdów " + fares.size());
                     adapter.notifyDataSetChanged();
-                    adapterNewFares.notifyDataSetChanged();
+
                 } else {
                     Log.d("Error", "Coś poszło nie tak . . .");
                 }
