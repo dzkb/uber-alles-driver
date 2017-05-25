@@ -15,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface UserService {
@@ -30,7 +31,7 @@ public interface UserService {
     @GET("/acceptedFares")
     Call<List<Fare>> acceptedFares();
     @POST("/completedFares/{fareId}")
-    Call<String> completeFare(@Path("fareId") String fareId);
+    Call<String> completeFare(@Path("fareId") String fareId, @Query("cost") int cost);
     @PUT("/localisation")
     Call<Point> putLocalisation(@Body Point currentLocalisation);
     @PUT("/registrationTokens")

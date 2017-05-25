@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +22,7 @@ import com.example.szymon.app.api.pojo.Fare;
 import com.example.szymon.app.api.pojo.Point;
 import com.example.szymon.app.fragments.DetailsFragment;
 import com.example.szymon.app.utils.CommonDate;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,7 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
 
         //final Fare fare = faresList.get(position);
-        CMFareRequest fareRequest = faresListToDo.get(position);
+        final CMFareRequest fareRequest = faresListToDo.get(position);
         Point startPoint = fareRequest.getStartingPoint();
         Point destinationPoint = fareRequest.getEndingPoint();
         Geocoder geocoder;
@@ -101,6 +103,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View v) {
 
                 DetailsFragment detailsFragment = new DetailsFragment();
+                Bundle arguments = new Bundle();
+                arguments.putString("JSONfareData", new Gson().toJson(fareRequest));
+                detailsFragment.setArguments(arguments);
                 openFragment(detailsFragment);
             }
         });

@@ -72,6 +72,10 @@ public class ApiImpl {
     }
 
     public static void changeFareStatus(Fares parameter, final String fareId) {
+        changeFareStatus(parameter, fareId, -1);
+    }
+
+    public static void changeFareStatus(Fares parameter, final String fareId, int cost) {
         final String phoneNumber = USER_PHONE;
         final String password = USER_PASSWORD;
         UserService fareService = ApiClient.createService(UserService.class, phoneNumber, password);
@@ -84,7 +88,7 @@ public class ApiImpl {
                 call = fareService.cancelFare(fareId);
                 break;
             case COMPLETE:
-                call = fareService.completeFare(fareId);
+                call = fareService.completeFare(fareId, cost);
                 break;
             default:
                 Log.d("Error", "Coś sie spiepszyło");
