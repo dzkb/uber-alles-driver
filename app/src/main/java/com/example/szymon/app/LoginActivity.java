@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.szymon.app.api.ApiClient;
 import com.example.szymon.app.api.UserService;
 import com.example.szymon.app.api.pojo.User;
+import com.example.szymon.app.database.FeedReaderDbHelper;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
@@ -65,13 +66,15 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.forgot_password_text)
     public void onForgotPasswordTextClick(View v) {
         Toast.makeText(this, "Forgot password implementation", Toast.LENGTH_SHORT).show();
+        FeedReaderDbHelper helper = new FeedReaderDbHelper(getApplicationContext());
+        helper.insertExample(helper.getWritableDatabase());
     }
 
     @OnClick(R.id.login_button)
     public void onLoginButtonClick(View v) {
         checkCredentials(phoneNumberEditText.getText().toString(), passwordEditText.getText().toString());
         Intent intent = new Intent(LoginActivity.this, DriverActivity.class);
-        startActivity(intent);
+        //startActivity(intent);
     }
 
     public void checkCredentials(String phoneNumber, final String password) {

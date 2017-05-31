@@ -93,10 +93,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 //        holder.startPoint.setText(String.valueOf((round(startPoint.getLatitude(), 2) + ", " + round(startPoint.getLongitude(), 2))));
 //        holder.destinationPoint.setText(String.valueOf((round(destinationPoint.getLatitude(), 2) + ", " + round(destinationPoint.getLongitude(), 2))));
         holder.date.setText(CommonDate.getFormattedTime(fareRequest.getStartingDate()));
-        holder.newFare.setVisibility(View.INVISIBLE);
+
         if (isNewFaresList) {
             holder.cardView.setBackgroundColor(Color.LTGRAY);
-            holder.newFare.setVisibility(View.VISIBLE);
+
         }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,13 +124,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public void deleteFare(String fareId){
+        for (CMFareRequest fare: faresListToDo) {
+            if(fare.getFareID().equals(fareId)){
+                faresListToDo.remove(fare);
+            }
+        }
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView startPoint;
         private TextView destinationPoint;
         private TextView date;
-        private TextView newFare;
         private CardView cardView;
 
         public ViewHolder(View itemView) {
@@ -139,7 +146,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             destinationPoint = (TextView) itemView.findViewById(R.id.destination_point_name);
             date = (TextView) itemView.findViewById(R.id.fare_date);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
-            newFare = (TextView) itemView.findViewById(R.id.new_fare_text_view);
         }
     }
 

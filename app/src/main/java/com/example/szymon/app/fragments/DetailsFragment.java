@@ -13,9 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.szymon.app.R;
+import com.example.szymon.app.RecyclerAdapter;
 import com.example.szymon.app.api.ApiImpl;
 import com.example.szymon.app.api.pojo.CMFareRequest;
 import com.example.szymon.app.api.pojo.Fare;
@@ -27,8 +31,12 @@ import com.google.gson.Gson;
 public class DetailsFragment extends Fragment {
 
     View rootView;
-    Button startFare, endFare;
-    CardView costCard;
+    Button startFare;
+    static Button endFare;
+    static Button cancelFare;
+    static TextView cost;
+    static CardView costCard;
+    static CardView endFareCard, cancelFareCard;
     public CMFareRequest fare;
 
     public DetailsFragment() {
@@ -53,13 +61,17 @@ public class DetailsFragment extends Fragment {
         fare = new Gson().fromJson(jsonFareData, CMFareRequest.class);
     }
 
-    private void bindViews(){
-        startFare= (Button) rootView.findViewById(R.id.start_fare);
-        endFare= (Button) rootView.findViewById(R.id.end_fare);
+    private void bindViews() {
+        startFare = (Button) rootView.findViewById(R.id.start_fare);
+        endFare = (Button) rootView.findViewById(R.id.end_fare);
         costCard = (CardView) rootView.findViewById(R.id.cost_card_view);
+        cancelFare = (Button) rootView.findViewById(R.id.cancel_fare);
+        cost = (TextView) rootView.findViewById(R.id.cost);
+        endFareCard = (CardView) rootView.findViewById(R.id.end_fare_card);
+        cancelFareCard = (CardView) rootView.findViewById(R.id.cancel_fare_card);
     }
 
-    private void onClick(){
+    private void onClick() {
         startFare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +89,16 @@ public class DetailsFragment extends Fragment {
                 costDialog.setArguments(fareData);
 
                 costDialog.show(getActivity().getSupportFragmentManager(), "CostaDialog");
-                costCard.setVisibility(View.VISIBLE);
+
+                RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getActivity(),getContext(),false);
+                recyclerAdapter.deleteFare(fare.getFareID());
+            }
+        });
+
+        cancelFare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TUTAJ ANULOWANIE PRZEJAZDU PRZEZ KIEROWCE
             }
         });
     }
@@ -88,12 +109,17 @@ public class DetailsFragment extends Fragment {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final String fareId = getArguments().getString("fareId");
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            final EditText input = new EditText(getContext());
+
             builder.setTitle("Podaj koszt")
-                    .setMessage("25zł")
+                    .setView(input)
                     .setPositiveButton("Potwierdz", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                            costCard.setVisibility(View.VISIBLE);
+                            cost.setText(input.getText());
+                            endFareCard.setVisibility(View.GONE);
+                            cancelFareCard.setVisibility(View.GONE);
                             ApiImpl.changeFareStatus(ApiImpl.Fares.COMPLETE, fareId, 25);
                         }
                     })

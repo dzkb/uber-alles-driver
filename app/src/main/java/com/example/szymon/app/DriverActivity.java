@@ -103,7 +103,7 @@ public class DriverActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
 
     }
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
