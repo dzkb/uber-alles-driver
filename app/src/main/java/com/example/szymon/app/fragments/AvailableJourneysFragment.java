@@ -1,9 +1,12 @@
 package com.example.szymon.app.fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +24,9 @@ import com.example.szymon.app.RecyclerAdapter;
 import com.example.szymon.app.api.ApiImpl;
 import com.example.szymon.app.api.pojo.CMFareRequest;
 import com.example.szymon.app.api.pojo.Fare;
+import com.example.szymon.app.api.pojo.HistoryFare;
 import com.example.szymon.app.api.pojo.Point;
+import com.example.szymon.app.database.FeedReaderDbHelper;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -57,12 +62,7 @@ public class AvailableJourneysFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
-
-
-
         adapter = new RecyclerAdapter(getActivity(), getContext(), false);
-
-
 
         recyclerView.setAdapter(adapter);
 
@@ -112,6 +112,16 @@ public class AvailableJourneysFragment extends Fragment {
                 ApiImpl.changeFareStatus(ApiImpl.Fares.CONFIRM, fareRequest.getFareID());
 
                 adapter.addFare(fareRequest);
+
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                String user = prefs.getString("Authentication_Id", "");
+                String fareId = fareRequest.getFareID();
+                String date = fareRequest.getStartingDate();
+                String startingPoint = findLocation(fareRequest.getStartingPoint());
+                String endingPoint = findLocation(fareRequest.getEndingPoint());
+                FeedReaderDbHelper helper = new FeedReaderDbHelper(getContext());
+                HistoryFare fare = new HistoryFare(fareId,date,startingPoint,endingPoint);
+                helper.insert(helper.getWritableDatabase(),fare,user);
             }
         });
     }

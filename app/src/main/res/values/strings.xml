@@ -50,4 +50,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="active">Aktywne</string>
     <string name="new_fares">Nowe przejazdy</string>
+    <string name="log_out">Wyloguj się</string>
+    <string name="cancel_fare">Anuluj przejazd</string>
 </resources>
