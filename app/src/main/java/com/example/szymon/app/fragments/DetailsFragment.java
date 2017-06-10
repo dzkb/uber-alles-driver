@@ -1,6 +1,5 @@
 package com.example.szymon.app.fragments;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -9,25 +8,30 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.szymon.app.R;
 import com.example.szymon.app.RecyclerAdapter;
+import com.example.szymon.app.api.ApiClient;
 import com.example.szymon.app.api.ApiImpl;
+import com.example.szymon.app.api.UserService;
 import com.example.szymon.app.api.pojo.CMFareRequest;
-import com.example.szymon.app.api.pojo.Fare;
 import com.google.gson.Gson;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.example.szymon.app.LogedUserData.USER_PASSWORD;
+import static com.example.szymon.app.LogedUserData.USER_PHONE;
+
 public class DetailsFragment extends Fragment {
 
     View rootView;
@@ -90,7 +94,7 @@ public class DetailsFragment extends Fragment {
 
                 costDialog.show(getActivity().getSupportFragmentManager(), "CostaDialog");
 
-                RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getActivity(),getContext(),false);
+                RecyclerAdapter recyclerAdapter = new RecyclerAdapter(getActivity(), getContext(), false);
                 recyclerAdapter.deleteFare(fare.getFareID());
             }
         });
@@ -98,7 +102,25 @@ public class DetailsFragment extends Fragment {
         cancelFare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TUTAJ ANULOWANIE PRZEJAZDU PRZEZ KIEROWCE
+                final String phoneNumber = USER_PHONE;
+                final String password = USER_PASSWORD;
+                UserService fareService = ApiClient.createService(UserService.class, phoneNumber, password);
+                Call<String> call = fareService.cancelFare(fare.getFareID());
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("OK", "Odpowiedź z serwera: " + response.body());
+                            Toast.makeText(getContext(), "Anulowano przejazd", Toast.LENGTH_LONG).show();
+                        } else {
+                            Log.d("Error", "Wystąpił błąd");
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("Error", t.getMessage());
+                    }
+                });
             }
         });
     }

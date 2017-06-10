@@ -5,14 +5,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.szymon.app.api.pojo.Fare;
-import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.api.pojo.Point;
 import com.example.szymon.app.api.pojo.RegistrationToken;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +20,7 @@ import retrofit2.Response;
 import static com.example.szymon.app.LogedUserData.ALL_FARES_LIST;
 import static com.example.szymon.app.LogedUserData.USER_PASSWORD;
 import static com.example.szymon.app.LogedUserData.USER_PHONE;
-import static com.example.szymon.app.LogedUserData.mainTheard;
 import static com.example.szymon.app.fragments.AvailableJourneysFragment.adapter;
-
 
 public class ApiImpl {
 
@@ -135,6 +130,7 @@ public class ApiImpl {
                     Log.d("Error", "Coś poszło nie tak . . .");
                 }
             }
+
             @Override
             public void onFailure(Call<Point> call, Throwable t) {
                 System.out.println("Lokalizacja nie została wysłana");

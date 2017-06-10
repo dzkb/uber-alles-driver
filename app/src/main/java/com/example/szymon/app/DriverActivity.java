@@ -15,10 +15,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.szymon.app.FirebaseCloudMessaging.InstanceIdService;
 import com.example.szymon.app.api.ApiImpl;
 import com.example.szymon.app.api.pojo.CMFareRequest;
-import com.example.szymon.app.api.pojo.Localisation;
 import com.example.szymon.app.api.pojo.RegistrationToken;
 import com.example.szymon.app.fragments.AvailableJourneysFragment;
 import com.example.szymon.app.fragments.HistoryFragment;
@@ -106,6 +104,7 @@ public class DriverActivity extends AppCompatActivity {
         transaction.commitAllowingStateLoss();
 
     }
+
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
